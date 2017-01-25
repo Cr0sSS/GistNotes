@@ -123,7 +123,7 @@
 - (void)checkChanges {
     NSString* newName = self.nameTextField.text;
     NSString* newNote = self.notesTextView.text;
-    
+        
     if (self.gist.edited && ![newName isEqualToString:self.gist.changedName]) {
         [self saveNote];
         

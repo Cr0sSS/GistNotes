@@ -21,6 +21,7 @@
 		8476C0A01E34B1660088F43A /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8476C09F1E34B1660088F43A /* DataManager.m */; };
 		8476C0A41E34C61E0088F43A /* GistsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8476C0A31E34C61E0088F43A /* GistsListCell.m */; };
 		8476C0A71E34D4980088F43A /* GistDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8476C0A61E34D4980088F43A /* GistDetailsViewController.m */; };
+		84FA055B1E38F30E00F499D8 /* AllInOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FA055A1E38F30E00F499D8 /* AllInOneViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		8476C0A31E34C61E0088F43A /* GistsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GistsListCell.m; sourceTree = "<group>"; };
 		8476C0A51E34D4980088F43A /* GistDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GistDetailsViewController.h; sourceTree = "<group>"; };
 		8476C0A61E34D4980088F43A /* GistDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GistDetailsViewController.m; sourceTree = "<group>"; };
+		84FA05591E38F30E00F499D8 /* AllInOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllInOneViewController.h; sourceTree = "<group>"; };
+		84FA055A1E38F30E00F499D8 /* AllInOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllInOneViewController.m; sourceTree = "<group>"; };
 		A96D5A1CA2F65CA3ED6B87B3 /* Pods-GistNotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GistNotes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GistNotes/Pods-GistNotes.debug.xcconfig"; sourceTree = "<group>"; };
 		B29F52400BE59E859D93EB78 /* libPods-GistNotes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GistNotes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2E22AD0BF48F779AD540CC4 /* Pods-GistNotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GistNotes.release.xcconfig"; path = "Pods/Target Support Files/Pods-GistNotes/Pods-GistNotes.release.xcconfig"; sourceTree = "<group>"; };
@@ -111,10 +114,12 @@
 				8476C08D1E3492FF0088F43A /* MainViewController.m */,
 				8476C08F1E3493740088F43A /* GistsViewController.h */,
 				8476C0901E3493740088F43A /* GistsViewController.m */,
-				8476C0A51E34D4980088F43A /* GistDetailsViewController.h */,
-				8476C0A61E34D4980088F43A /* GistDetailsViewController.m */,
 				8476C0921E3493840088F43A /* NotesViewController.h */,
 				8476C0931E3493840088F43A /* NotesViewController.m */,
+				84FA05591E38F30E00F499D8 /* AllInOneViewController.h */,
+				84FA055A1E38F30E00F499D8 /* AllInOneViewController.m */,
+				8476C0A51E34D4980088F43A /* GistDetailsViewController.h */,
+				8476C0A61E34D4980088F43A /* GistDetailsViewController.m */,
 				8476C07B1E34904B0088F43A /* Main.storyboard */,
 				8476C0811E34904C0088F43A /* Assets.xcassets */,
 				8476C0831E34904C0088F43A /* LaunchScreen.storyboard */,
@@ -285,6 +290,7 @@
 				8476C0771E34904B0088F43A /* AppDelegate.m in Sources */,
 				8476C0911E3493740088F43A /* GistsViewController.m in Sources */,
 				8476C0941E3493840088F43A /* NotesViewController.m in Sources */,
+				84FA055B1E38F30E00F499D8 /* AllInOneViewController.m in Sources */,
 				8476C0A41E34C61E0088F43A /* GistsListCell.m in Sources */,
 				8476C0801E34904C0088F43A /* GistNotes.xcdatamodeld in Sources */,
 				8476C0981E3497BE0088F43A /* ServerManager.m in Sources */,
