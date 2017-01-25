@@ -29,8 +29,6 @@ static NSString* const cellIdentifier = @"GistsListCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self refreshData];
-    
     self.navigationItem.title = @"All Gists";
     
     currentDateFormat = [NSDateFormatter new];
@@ -38,46 +36,59 @@ static NSString* const cellIdentifier = @"GistsListCell";
     
     self.refreshControl = [UIRefreshControl new];
     [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
-
+    
+    [self refreshData];
 }
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.tableView reloadData];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 
+#pragma mark - Data
+
 - (void)refreshData {
-    [[ServerManager sharedManager] getPublicGistsFromServerOnSuccess:^(NSMutableArray *gists) {
+    self.page = 1;
+    
+    [[ServerManager sharedManager]
+     getPublicGistsFromServerOnPage:self.page
+     onSuccess:^(NSMutableArray *gists) {
         
-        self.page = 1;
         self.gists = gists;
-        
         [self.refreshControl endRefreshing];
         [self.tableView reloadData];
         
-    } onFailure:^(NSError *error) {
+     }
+     onFailure:^(NSError *error) {
         
-    }];
+     }];
 }
 
 
 - (void)loadExtraData {
     self.page++;
     
-    [[ServerManager sharedManager] getExtraPublicGistsFromServerOnPage:self.page
-     
+    [[ServerManager sharedManager]
+     getPublicGistsFromServerOnPage:self.page
      onSuccess:^(NSMutableArray *gists) {
          [self.gists addObjectsFromArray:gists];
          [self.tableView reloadData];
          
      }
      onFailure:^(NSError *error) {
-        
-    }];
+     
+         
+     }];
 }
 
 
-#pragma mark - UITableViewDataSource
+#pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -95,24 +106,20 @@ static NSString* const cellIdentifier = @"GistsListCell";
     Gist* gist = self.gists[indexPath.row];
     
     NSString* name = gist.name;
-    if ([name isEqualToString:@""]) {
-        cell.nameLabel.text = @"<no name>";
-        
-    } else {
-        cell.nameLabel.text = name;
-    }
+    cell.nameLabel.text = [name isEqualToString:@""] ? @"<no name>" : name;
     
     cell.ownerLoginLabel.text = gist.ownerLogin ? gist.ownerLogin : @"<no author>";
     cell.dateLabel.text = [currentDateFormat stringFromDate:gist.createDate];
     
+    cell.noteLabel.hidden = !gist.edited;
     return cell;
 }
 
 
-#pragma mark - UITableViewDelegate
+#pragma mark - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     GistDetailsViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"GistDetailsVC"];
     vc.gist = self.gists[indexPath.row];

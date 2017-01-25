@@ -12,11 +12,8 @@
 
 + (ServerManager*)sharedManager;
 
-- (void)getPublicGistsFromServerOnSuccess:(void(^)(NSMutableArray* gists))success
-                                onFailure:(void(^)(NSError* error))failure;
-
-- (void)getExtraPublicGistsFromServerOnPage:(NSInteger)page
-                                  onSuccess:(void(^)(NSMutableArray* gists))success
-                                  onFailure:(void(^)(NSError* error))failure;
+- (void)getPublicGistsFromServerOnPage:(NSInteger)page
+                             onSuccess:(void(^)(NSMutableArray* gists))success
+                             onFailure:(void(^)(NSError* error))failure;
 
 @end

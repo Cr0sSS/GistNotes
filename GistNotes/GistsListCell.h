@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *ownerLoginLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *noteLabel;
 
 @end

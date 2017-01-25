@@ -17,7 +17,7 @@
 + (DataManager*)sharedManager;
 
 - (NSMutableArray*)gistsFromResponse:(NSArray*)response;
-
+- (NSArray*)gistsWithNotes;
 
 - (void)saveContext;
 

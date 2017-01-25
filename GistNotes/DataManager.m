@@ -51,6 +51,12 @@ NSDateFormatter* isoDateFormat;
 }
 
 
+- (NSArray*)gistsWithNotes{
+    NSArray* gists = [self getGistsWithNotes];
+    return gists;
+}
+
+
 #pragma mark - Creates
 
 - (Gist*)createNewGistWithDetails:(NSDictionary*)details {
@@ -60,6 +66,7 @@ NSDateFormatter* isoDateFormat;
     
     gist.gistID = details[@"id"];
     gist.edited = NO;
+    gist.note = @"";
     gist.createDate = [isoDateFormat dateFromString:details[@"created_at"]];
     
     id name = details[@"description"];
@@ -72,7 +79,6 @@ NSDateFormatter* isoDateFormat;
 
     gist.ownerLogin = details[@"owner"][@"login"];
     gist.avatarURLString = details[@"owner"][@"avatar_url"];
-    
     
     return gist;
 }
@@ -95,6 +101,27 @@ NSDateFormatter* isoDateFormat;
     
     return [result count] ? [result firstObject] : nil;
 }
+
+
+- (NSArray*)getGistsWithNotes {
+    
+    NSFetchRequest* request = [NSFetchRequest new];
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Gist"
+                                              inManagedObjectContext:self.persistentContainer.viewContext];
+    [request setEntity:entity];
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"edited == YES"];
+    [request setPredicate:predicate];
+    
+    NSSortDescriptor* dateDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO];
+    [request setSortDescriptors:@[dateDescriptor]];
+    
+    NSError* error = nil;
+    NSArray* result = [self.persistentContainer.viewContext executeFetchRequest:request error:&error];
+    
+    return result;
+}
+
 
 #pragma mark - Core Data stack
 
@@ -127,6 +154,7 @@ NSDateFormatter* isoDateFormat;
     
     return _persistentContainer;
 }
+
 
 #pragma mark - Core Data Saving support
 
