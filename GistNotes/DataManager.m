@@ -41,10 +41,6 @@ NSDateFormatter* isoDateFormat;
         
         if (!gist) {
             gist = [self createNewGistWithDetails:details];
-            NSLog(@"GIST %@ was created", gistID);
-            
-        } else {
-            NSLog(@"GIST %@ was loaded from Core Data", gistID);
         }
 
         [gists addObject:gist];
@@ -67,8 +63,8 @@ NSDateFormatter* isoDateFormat;
     gist.createDate = [isoDateFormat dateFromString:details[@"created_at"]];
     
     id name = details[@"description"];
-    if ([name isKindOfClass:[NSNull class]] || [name isEqual:@""]) {
-        gist.name = @"< нет описания >";
+    if ([name isKindOfClass:[NSNull class]]) {
+        gist.name = @"";
         
     } else {
         gist.name = details[@"description"];

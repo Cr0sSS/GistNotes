@@ -39,13 +39,6 @@ static NSString* const cellIdentifier = @"GistsListCell";
     self.refreshControl = [UIRefreshControl new];
     [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
 
-    
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,8 +64,7 @@ static NSString* const cellIdentifier = @"GistsListCell";
 - (void)loadExtraData {
     self.page++;
     
-    [[ServerManager sharedManager]
-     getExtraPublicGistsFromServerOnPage:self.page
+    [[ServerManager sharedManager] getExtraPublicGistsFromServerOnPage:self.page
      
      onSuccess:^(NSMutableArray *gists) {
          [self.gists addObjectsFromArray:gists];
@@ -102,8 +94,15 @@ static NSString* const cellIdentifier = @"GistsListCell";
     GistsListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     Gist* gist = self.gists[indexPath.row];
     
-    cell.ownerLoginLabel.text = gist.ownerLogin;
-    cell.nameLabel.text = gist.name;
+    NSString* name = gist.name;
+    if ([name isEqualToString:@""]) {
+        cell.nameLabel.text = @"<no name>";
+        
+    } else {
+        cell.nameLabel.text = name;
+    }
+    
+    cell.ownerLoginLabel.text = gist.ownerLogin ? gist.ownerLogin : @"<no author>";
     cell.dateLabel.text = [currentDateFormat stringFromDate:gist.createDate];
     
     return cell;
@@ -117,6 +116,7 @@ static NSString* const cellIdentifier = @"GistsListCell";
     
     GistDetailsViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"GistDetailsVC"];
     vc.gist = self.gists[indexPath.row];
+    vc.onlyOriginalInfo = NO;
     
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -127,15 +127,5 @@ static NSString* const cellIdentifier = @"GistsListCell";
         [self loadExtraData];
     }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
