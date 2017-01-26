@@ -1,7 +1,7 @@
 # GistNotes
-!UNDER CONSTRUCTION! Gists Viewer
+Gists Viewer
 
-Просмотр Gists на GitHub. 
+Просмотр заголовков Gists на GitHub. 
 
 - Сохранение загруженных Gist в Core Data
 - Подгрузка по мере скролла
