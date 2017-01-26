@@ -8,6 +8,7 @@
 
 #import "AllInOneViewController.h"
 #import "GistDetailsViewController.h"
+#import "ErrorController.h"
 
 #import "ServerManager.h"
 #import "DataManager.h"
@@ -74,7 +75,7 @@ static NSString* const cellIdentifier = @"GistsListCell";
          [self.gistsTableView reloadData];
      }
      onFailure:^(NSError *error) {
-         
+         [self showError:error];
      }];
 }
 
@@ -90,14 +91,20 @@ static NSString* const cellIdentifier = @"GistsListCell";
          [self.gistsTableView reloadData];
      }
      onFailure:^(NSError *error) {
-         
-         
+         [self showError:error];
      }];
 }
 
 
 - (void)fillNotesArray {
     self.notes = [[DataManager sharedManager] gistsWithNotes];
+}
+
+
+#pragma mark - Error
+
+- (void)showError:(NSError*)error {
+    [ErrorController errorControllerWithTitle:@"All-In-One View Error" message:[error localizedDescription]];
 }
 
 

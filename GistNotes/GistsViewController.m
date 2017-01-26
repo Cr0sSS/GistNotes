@@ -8,6 +8,7 @@
 
 #import "GistsViewController.h"
 #import "GistDetailsViewController.h"
+#import "ErrorController.h"
 
 #import "GistsListCell.h"
 #import "ServerManager.h"
@@ -66,7 +67,7 @@ static NSString* const cellIdentifier = @"GistsListCell";
         
      }
      onFailure:^(NSError *error) {
-        
+         [self showError:error];
      }];
 }
 
@@ -82,9 +83,15 @@ static NSString* const cellIdentifier = @"GistsListCell";
          
      }
      onFailure:^(NSError *error) {
-     
-         
+         [self showError:error];
      }];
+}
+
+
+#pragma mark - Error
+
+- (void)showError:(NSError*)error {
+    [ErrorController errorControllerWithTitle:@"Gists View Error" message:[error localizedDescription]];
 }
 
 

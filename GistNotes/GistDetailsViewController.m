@@ -7,6 +7,7 @@
 //
 
 #import "GistDetailsViewController.h"
+#import "ErrorController.h"
 
 #import "Gist+CoreDataClass.h"
 
@@ -96,8 +97,15 @@
                                              [weakImageView layoutSubviews];
                                          }
                                          failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-        
+                                             [self showError:error];
                                          }];
+}
+
+
+#pragma mark - Error
+
+- (void)showError:(NSError*)error {
+    [ErrorController errorControllerWithTitle:@"GistDetails View Error" message:[error localizedDescription]];
 }
 
 
