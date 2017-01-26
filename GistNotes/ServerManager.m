@@ -11,6 +11,7 @@
 
 #import "AFNetworking.h"
 
+
 @interface ServerManager ()
 
 @property (strong, nonatomic) AFHTTPSessionManager* sessionManager;

@@ -11,6 +11,7 @@
 
 #import "Gist+CoreDataClass.h"
 
+
 @implementation DataManager
 
 NSDateFormatter* isoDateFormat;
